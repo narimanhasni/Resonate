@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faPhone, faMapMarkerAlt, faBuilding } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faPhone, faMapMarkerAlt, faBuilding, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
   const [contacts, setContacts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
-  const [showLanding, setShowLanding] = useState(true);
   const [theme, setTheme] = useState('light');
 
   useEffect(() => {
@@ -44,10 +43,9 @@ function App() {
     <div className={`App ${theme}`}>
       <nav className={`navbar ${theme}`}>
         <h1>Contacts</h1>
-        <label className="theme-switcher">
-          <input type="checkbox" onChange={toggleTheme} checked={theme === 'dark'} />
-          <span className="slider"></span>
-        </label>
+        <button className="theme-switcher" onClick={toggleTheme}>
+          <FontAwesomeIcon icon={faXmark} />
+        </button>
       </nav>
       <div className="search-container">
         <input
@@ -63,6 +61,7 @@ function App() {
           <div className={`individual-contact ${theme}`} key={contact.id}>
             <div className="contact-container">
               <figure className="contact-img-wrapper">
+                <img src={`https://i.pravatar.cc/150?u=${contact.id}`} alt={contact.name} className="contact-img"/>
               </figure>
               <h2 className={`contact-name ${theme}`}>{contact.name}</h2>
             </div>
